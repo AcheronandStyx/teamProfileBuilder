@@ -6,12 +6,12 @@ const createEmployee = [
     {
         type: 'input',
         name: 'employeeName',
-        message: 'What is the team managers name?',
+        message: 'What is their name?',
         validate: nameInpout => {
             if (nameInpout) {
                 return true;
             } else {
-                console.log('Please enter the managers name!');
+                console.log('Please enter their name!');
                 return false;
             }
         }
@@ -31,7 +31,7 @@ const createEmployee = [
     {
         type: 'input',
         name: 'email',
-        message: 'What is s their email address?',
+        message: 'What is their email address?',
         validate: emailInput => {
             if (emailInput) {
                 return true;
@@ -49,8 +49,9 @@ const createEmployee = [
             }
         }*/
     }
-    
-    /*, Pushing this onto array in Team.js line 20
+];
+
+const managerQuery = [
     {
         type: 'input',
         name: 'officeNumber',
@@ -59,35 +60,38 @@ const createEmployee = [
             if (officeNumberInput) {
                 return true;
             } else {
-                console.log('Please enter their email address!'); // Make a seperate function to validate an email address was entered??? Regex  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+                console.log('Please enter their office number'); // Make a seperate function to validate an email address was entered??? Regex  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
             }
         }
-    }*/
-];
+    }
+]
 
-// restrcuture prompts so the confirmTeam questions isthe first question
-const createNonManger = [
+const confirmAddMember = [
     {
         type: 'list',
         name: 'confirmTeam',
-        message: 'Would you like to add a team member or generate the team page?',
-        choices: ['Add a Team Member', 'Complete the Page']
-    },
+        message: 'Would you like to add a team member or finalize the team?',
+        choices: ['Add an engineer', 'Add an intern', 'Finalize Team']
+    }
+];
+/*
+const confirmEmployeeType = [
     {
         type: 'list',
         name: 'role',
-        message: 'Is the new team member and Enginner or an Intern?',
+        message: 'Is the new team member an Enginner or an Intern?',
         choices: ['Engineer', 'Intern'],
-        when(answers) {
-            return answers.confirmTeam === 'Add a Team Member'
-        }
-    },
+    }
+];*/
+
+// restrcuture prompts so the confirmTeam questions isthe first question
+const createNonManger = [
     {
         type: 'input',
         name: 'gitHub',
         message: 'What is the Engineers GitHub username?',
         when(answers) { // only ask if new employee is an Engineer.
-            return answers.confirmTeam === 'Engineer'
+            return answers.confirmTeam === 'Add an engineer'
         },
         validate: gitHubInput => {
             if (gitHubInput) {
@@ -102,107 +106,18 @@ const createNonManger = [
         name: 'school',
         message: 'What school does the Intern go to?',
         when(answers) { // only ask if new employee is an Intern.
-            return answers.confirmTeam === 'Intern'
+            return answers.confirmTeam === 'Add an intern'
         },
         validate: schoolInput => {
             if (schoolInput) {
                 return true;
             } else {
-                console.log('Please enter the interns school');
+                console.log('Please enter the interns school!');
             }
         }
     }
 ];
 
 
-module.exports = {createEmployee, createNonManger};
-// separate array for each employee type or one array? I want to use one, not sure on the logic
-/*
-const generateEmployee = [
-    {
-        type: 'input',
-        name: 'officeNumber',
-        message: 'What is the managers office number?', // This only gets asked once when a manager is created
-        validate: officeNumberInput => {
-            if (officeNumberInput) {
-                return true;
-            } else {
-                console.log('Please enter their email address!'); // Make a seperate function to validate an email address was entered??? Regex  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-            }
-        }
-    },
-    {
-        type: 'input',
-        name: 'gitHub',
-        message: 'What is the Engineers GitHub username?',
-        },
-    },
-    {
-        type: 'input',
-        name: 'school',
-        message: 'What school does the Intern go to?',
-        when: ({role === 'intern'}) => { // how do you validate the employees role and ask the appropriate question?
-            if (this.role === 'manager') {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        validate: schoolInput => {
-            if (schoolInput) {
-                return true;
-            } else {
-                console.log('Please enter the interns school');
-            }
-        }
-    }
 
-];
-*/
-/*
-const generateManger = [
-    {
-        type: 'input',
-        name: 'officeNumber',
-        message: 'What is the managers office number?', // This only gets asked once when a manager is created
-        validate: officeNumberInput => {
-            if (officeNumberInput) {
-                return true;
-            } else {
-                console.log('Please enter their email address!'); // Make a seperate function to validate an email address was entered??? Regex  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-            }
-        }
-    }
-]
-
-const generateEngineer = [
-    {
-        type: 'input',
-        name: 'gitHub',
-        message: 'What is the Engineers GitHub username?',
-        validate: officeNumberInput => {
-            if (officeNumberInput) {
-                return true;
-            } else {
-                console.log('Please enter their email address!');
-            }
-        }
-    }
-]
-
-const generateIntern = [
-    {
-        type: 'input',
-        name: 'school',
-        message: 'What school does the Intern go to?',
-        validate: schoolInput => {
-            if (schoolInput) {
-                return true;
-            } else {
-                console.log('Please enter the interns school');
-            }
-        }
-    }
-
-]
-*/
+    module.exports = { managerQuery, createEmployee, confirmAddMember, createNonManger };

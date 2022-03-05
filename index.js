@@ -2,8 +2,15 @@ const Team = require('./lib/Team');
 
 const fs = require('fs'); // import fs library
 
+/*
+
+
+*/
+
+
 new Team().buildTeam();
 
+// move logic to index.js
 // function to generate the html this verison requires no promises
 //fs.writeFileSync("./dist/teamPage.html", generatepage(arr))
 
