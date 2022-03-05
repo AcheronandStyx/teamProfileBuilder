@@ -5,7 +5,7 @@
 const createEmployee = [
     {
         type: 'input',
-        name: 'name',
+        name: 'employeeName',
         message: 'What is the team managers name?',
         validate: nameInpout => {
             if (nameInpout) {
@@ -38,14 +38,16 @@ const createEmployee = [
             } else {
                 console.log('Please enter their email address!'); // Make a seperate function to validate an email address was entered??? Regex  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
             }
-        },
-        validate = (answer) => {
+        },/*
+        validate: answer => {
             const emailValidate = '/^[^\s@]+@[^\s@]+\.[^\s@]+$/';
-            if(!emailValidate.test(answer)) {
-                return "Please provide a valid email address!"
+            console.log(emailValidate.match(answer)); 
+            if(emailValidate.match(answer)) {
+                return true 
+            }else {
+            return  "Please provide a valid email address!"; 
             }
-            return true
-        }
+        }*/
     }
     
     /*, Pushing this onto array in Team.js line 20
@@ -63,6 +65,7 @@ const createEmployee = [
     }*/
 ];
 
+// restrcuture prompts so the confirmTeam questions isthe first question
 const createNonManger = [
     {
         type: 'list',
