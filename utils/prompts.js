@@ -53,18 +53,26 @@ const createManager = [
         }
     }
 ];
-
+// confirmTeam, position, employeeName, id, email, gitHub, school
 const createEmployee = [
     {
-        type: 'list',
+        type: 'confirm',
         name: 'confirmTeam',
-        message: 'Would you like to add a team member or finalize the team?',
-        choices: ['Add an engineer', 'Add an intern', 'Finalize Team']
+        message: 'Would you like to add a team member?',
+        default: false,
+    },
+    {
+        type: 'list',
+        name: 'position',
+        message: 'Is this team member an engineer or an intern?',
+        choices: ['Engineer', 'Intern'],
+        when: ({ confirmTeam }) => confirmTeam
     },
     {
         type: 'input',
         name: 'employeeName',
         message: 'What is the employees name?',
+        when: ({ confirmTeam }) => confirmTeam,
         validate: nameInpout => {
             if (nameInpout) {
                 return true;
@@ -78,6 +86,7 @@ const createEmployee = [
         type: 'input',
         name: 'id',
         message: 'What is their Employee ID?',
+        when: ({ confirmTeam }) => confirmTeam,
         validate: idInput => {
             if (idInput) {
                 return true;
@@ -90,6 +99,7 @@ const createEmployee = [
         type: 'input',
         name: 'email',
         message: 'What is their email address?',
+        when: ({ confirmTeam }) => confirmTeam,
         validate: emailInput => {
             if (emailInput) {
                 return true;
@@ -111,8 +121,9 @@ const createEmployee = [
         type: 'input',
         name: 'gitHub',
         message: 'What is the Engineers GitHub username?',
+        when: ({ confirmTeam }) => confirmTeam,
         when(answers) { // only ask if new employee is an Engineer.
-            return answers.confirmTeam === 'Add an engineer'
+            return answers.position === 'Engineer'
         },
         validate: gitHubInput => {
             if (gitHubInput) {
@@ -126,8 +137,9 @@ const createEmployee = [
         type: 'input',
         name: 'school',
         message: 'What school does the Intern go to?',
+        when: ({ confirmTeam }) => confirmTeam,
         when(answers) { // only ask if new employee is an Intern.
-            return answers.confirmTeam === 'Add an intern'
+            return answers.position === 'Intern'
         },
         validate: schoolInput => {
             if (schoolInput) {

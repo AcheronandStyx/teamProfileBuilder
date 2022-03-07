@@ -1,14 +1,46 @@
 const Team = require('./lib/Team');
-
+const Manager = require('./lib/Manager.js');
+const Engineer = require('./lib/Engineer.js');
+const Intern = require('./lib/Intern.js');
 const fs = require('fs'); // import fs library
+const { createManager, createEmployee } = require('./utils/prompts.js');
 
 /*
 
 
 */
 
+const myTeam = new Team();
 
-new Team().buildTeam();
+console.log(`
+Welcome to Team Profile Builder! Please answer some questions about your development team.
+    `);
+
+
+
+myTeam.addManager(createManager)
+.then(({ employeeName, id, email, officeNumber }) => {
+    const manager = new Manager(employeeName, id, email, officeNumber);
+    myTeam.members.push(manager);
+    // console.log(teamData.members); // successsfully creates the manager and pushes it into the array
+})
+.then( () => {
+    myTeam.addTeamMembers(createEmployee, myTeam.teamData)
+    //return myTeam.members.concat(myTeam.addTeamMembers(createEmployee, myTeam.teamData));
+    // myTeam.members.concat(teamMembers);
+})
+/*
+.then( () => {
+    console.log("next then");
+});*/
+
+
+/*
+teamData.buildTeam()
+.then(check => {
+    console.log(Team)
+});*/
+//new Team().buildTeam();
 
 // move logic to index.js
 // function to generate the html this verison requires no promises
