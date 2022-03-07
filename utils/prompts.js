@@ -6,7 +6,7 @@ const createManager = [
     {
         type: 'input',
         name: 'employeeName',
-        message: 'What is their name?',
+        message: 'What is the team managers name?',
         validate: nameInpout => {
             if (nameInpout) {
                 return true;

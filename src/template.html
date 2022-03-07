@@ -1,0 +1,21 @@
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="name">
+            <h2>${teamData.getName()}</h2>
+        </div>
+        <div class="employee-body">
+            <p>Position: ${teamData.getRole()}</p>
+            <p>Employee ID: ${teamData.getId()}</p>
+            <p>Email: ${teamData.getEmail()}</p>
+            <p>${ if(teamData.getRole() === 'Manager') {
+                '<p>Office Number: ' + teamData.getOfficeNumber' + '</p>'
+            } else if (if(teamData.getRole() === 'Enginer') ) {
+                '<p>GitHub: ' + teamData.getGitHub' + '</p>'
+            } else {
+                '<p>School: ' + teamData.getSchool' + '</p>'
+            }}</p>
+        </div>
+    </div>
+</div>
